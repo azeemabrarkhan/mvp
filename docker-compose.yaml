@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+
+  backend:
+    image: mvp-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "${BACKEND_PORT}:4000"
+    command: sh -c "npm run migrate && npm run seed && npm run start"
+    environment:
+      JWT_SECRET: "${JWT_SECRET}"
+      DATABASE_URL: "${DATABASE_URL}"
+    depends_on:
+      - db
+
+  frontend:
+    image: mvp-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - db
+      - backend
+
+volumes:
+  db-data:
