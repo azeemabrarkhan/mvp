@@ -1,0 +1,138 @@
+.user-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    .user-email {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      flex: 1;
+      word-break: break-word;
+    }
+
+    .user-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+
+      .user-role {
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        white-space: nowrap;
+
+        &.role-admin {
+          background-color: #fce4ec;
+          color: #c2185b;
+          border: 1px solid #f8bbd9;
+        }
+
+        &.role-user {
+          background-color: #e8f5e8;
+          color: #388e3c;
+          border: 1px solid #a5d6a7;
+        }
+      }
+
+      .user-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        white-space: nowrap;
+
+        &.status-active {
+          background-color: #e8f5e8;
+          color: #388e3c;
+          border: 1px solid #a5d6a7;
+        }
+
+        &.status-blocked {
+          background-color: #ffebee;
+          color: #d32f2f;
+          border: 1px solid #ffcdd2;
+        }
+      }
+    }
+  }
+
+  .user-dates {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 1rem;
+
+    div {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .user-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .updating-text {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (max-width: 768px) {
+  .user-card {
+    padding: 1rem;
+
+    .user-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      .user-badges {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .user-card {
+    .user-header {
+      .user-email {
+        font-size: 1.1rem;
+      }
+
+      .user-badges {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+    }
+
+    .user-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         Role     @default(USER)
+  status       Status   @default(ACTIVE)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  projects  Project[]
+  auditLogs AuditLog[]
+
+  @@map("users")
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  name      String
+  ownerId   String   @map("owner_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  tasks Task[]
+
+  @@map("projects")
+}
+
+model Task {
+  id        String     @id @default(uuid())
+  projectId String     @map("project_id")
+  title     String
+  status    TaskStatus @default(NEW)
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+model AuditLog {
+  id          String      @id @default(uuid())
+  ts          DateTime    @default(now())
+  actorUserId String?     @map("actor_user_id")
+  action      AuditAction
+  entityType  EntityType? @map("entity_type")
+  entityId    String?     @map("entity_id")
+  result      AuditResult
+  ip          String
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  actorUser User? @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}
+
+enum Role {
+  USER
+  ADMIN
+
+  @@map("role")
+}
+
+enum Status {
+  ACTIVE
+  BLOCKED
+
+  @@map("status")
+}
+
+enum TaskStatus {
+  NEW
+  IN_PROGRESS
+  DONE
+
+  @@map("task_status")
+}
+
+enum AuditAction {
+  LOGIN
+  VIEW
+  BLOCK
+  UNBLOCK
+}
+
+enum EntityType {
+  USER
+  PROJECT
+  TASK
+}
+
+enum AuditResult {
+  SUCCESS
+  FAILED
+}

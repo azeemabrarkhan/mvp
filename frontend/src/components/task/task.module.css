@@ -1,0 +1,113 @@
+.task-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    .task-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      flex: 1;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .task-status {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &.status-new {
+        background-color: #e3f2fd;
+        color: #1976d2;
+        border: 1px solid #bbdefb;
+      }
+
+      &.status-in-progress {
+        background-color: #fff3e0;
+        color: #f57c00;
+        border: 1px solid #ffcc02;
+      }
+
+      &.status-done {
+        background-color: #e8f5e8;
+        color: #388e3c;
+        border: 1px solid #a5d6a7;
+      }
+    }
+  }
+
+  .task-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .task-footer {
+    display: flex;
+    justify-content: space-between;
+
+    .task-dates {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 1rem;
+
+      div {
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .task-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (max-width: 768px) {
+  .task-card {
+    .task-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      .task-status {
+        align-self: flex-start;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .task-card {
+    padding: 1rem;
+
+    .task-header {
+      .task-title {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 7rem 3rem;
+
+  .header {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: var(--color--cyan);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #0056b3;
+      }
+    }
+  }
+
+  .tasks-container {
+    align-self: flex-start;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tasks {
+    margin: 7rem 1rem;
+
+    .tasks-container {
+      .tasks-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .tasks {
+    margin: 6rem 0.5rem;
+  }
+}

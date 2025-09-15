@@ -1,0 +1,16 @@
+.projectForm {
+  background-color: var(--color-white);
+  padding: 2rem;
+  width: 40rem;
+  border-radius: 3%;
+
+  h2 {
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}

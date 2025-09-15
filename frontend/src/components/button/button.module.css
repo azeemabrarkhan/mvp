@@ -1,0 +1,20 @@
+.button {
+  .content {
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &.rounded {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

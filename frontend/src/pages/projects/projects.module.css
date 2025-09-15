@@ -1,0 +1,20 @@
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 7rem 3rem;
+
+  .projects-container {
+    align-self: flex-start;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+  }
+}
